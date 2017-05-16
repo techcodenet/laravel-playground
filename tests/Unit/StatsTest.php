@@ -164,4 +164,33 @@ class StatsTest extends TestCase
             $stats->dump()
         );
     }
+
+    public function testStatsABCConstructor(){
+        $stats = new Stats("abc");
+
+        $this->assertEquals(
+            array(
+                'a' => [
+                    'before' => ['b'],
+                    'after' => [],
+                    'count' => 1,
+                    'distance' => 0,
+                ],
+                'b' => [
+                    'before' => ['c'],
+                    'after' => ['a'],
+                    'count' => 1,
+                    'distance' => 0,
+                ],
+                'c' => [
+                    'before' => [],
+                    'after' => ['b'],
+                    'count' => 1,
+                    'distance' => 0,
+                ]
+            ),
+            $stats->dump()
+        );
+    }
+
 }

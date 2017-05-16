@@ -10,6 +10,16 @@ class Stats {
     protected $previous_letter   = '';
     protected $letter_count      = 0;
 
+    public function __construct($string=''){
+        if(!empty($string)){
+            $str_array  = str_split( $string );
+
+            foreach($str_array as $char){
+                $this->add_letter($char);
+            }
+        }
+    }
+
     public function add_letter($char){
         if(!isset($this->letters[$char])){
             $this->letters[$char] = new Node( $char, $this->previous_letter, $this->letter_count );
