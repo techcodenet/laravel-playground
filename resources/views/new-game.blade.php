@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Poker - Game</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -62,52 +62,30 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-
-            table td {
-                padding: 5px;
-            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+
             <div class="content">
                 <div class="title m-b-md">
-                    String
+                    Poker - New Game
                 </div>
 
-                @if ($errors)
-                <div style="padding: 15px;">
-                    <h1>{{ $errors }}</h1>
-                </div>
-                @endif
+                <div class="content">
 
-                <form method="get" action="{{ url('/stats') }}">
-                    Please enter some text
-                    <input type="text" name="string" maxlength="255" value="{{ $string }}"/>
-                    <input type="submit" value="submit" />
-                </form>
-                @if(!empty($stats))
-                    <div style="font-weight: bold; color: 000; text-align: left; margin: 20px auto;">
-                        <table border="1" style="border-spacing: 0;" align="center">
-                          <tr>
-                            <td>char</td>
-                            <td>cnt</td>
-                            <td>before</td>
-                            <td>after</td>
-                            <td>max-distance</td>
-                          </tr>
-                          @foreach ($stats as $char => $node)
-                            <tr>
-                              <td>{{ $char }}</td>
-                              <td>{{ $node['count'] }}</td>
-                              <td>{{ json_encode( $node['before'] ) }}</td>
-                              <td>{{ json_encode( $node['after'] ) }}</td>
-                              <td>{{ $node['distance'] }}</td>
-                            </tr>
-                          @endforeach
-                        </table>
-                    </div>
-                @endif
+                  <form method="get" action="{{ url('/draw-card') }}">
+                      <input type="hidden" name="deck_id" value="{{ $poker_deck->deck_id() }}" />
+                      <b>Select card (suit and value):</b>
+                      <select name="wanted_card">
+                        @foreach ( $poker_deck->sorted_deck() as $card )
+                          <option value="{{ $card }}">{{ $card }}</option>
+                        @endforeach
+                      </select>
+
+                      <input type="submit" name="submit">
+                  </form>
+                </div>
             </div>
             <div class="content links" style="margin: 25px; border:1px solid; padding: 0px 10px 25px 10px;">
                 <h2>Links</h2>

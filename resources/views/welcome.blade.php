@@ -68,14 +68,13 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div class="title m-b-md">
-                    String
+                    String Stats or Poker Deck?
                 </div>
-
-                <form method="get" action="{{ url('/stats') }}">
-                    Please enter some text
-                    <input type="text" name="string" maxlength="255" />
-                    <input type="submit" value="submit" />
-                </form>
+            </div>
+            <div class="content links" style="margin: 25px; border:1px solid; padding: 0px 10px 25px 10px;">
+                <h2>Links</h2>
+                <a href="{{ url('/stats?string=abba') }}">String Stats</a>
+                <a href="{{ url('/new-game') }}">Poker Deck</a>
             </div>
         </div>
     </body>
