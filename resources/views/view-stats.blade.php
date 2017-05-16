@@ -62,6 +62,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            table td {
+                padding: 5px;
+            }
         </style>
     </head>
     <body>
@@ -71,11 +75,39 @@
                     String
                 </div>
 
+                @if ($errors)
+                <div style="padding: 15px;">
+                    <h1>{{ $errors }}</h1>
+                </div>
+                @endif
+
                 <form method="get" action="{{ url('/stats') }}">
                     Please enter some text
-                    <input type="text" name="string" maxlength="255" />
+                    <input type="text" name="string" maxlength="255" value="{{ $string }}"/>
                     <input type="submit" value="submit" />
                 </form>
+                @if(!empty($stats))
+                    <div style="font-weight: bold; color: 000; text-align: left; margin: 20px auto;">
+                        <table border="1" style="border-spacing: 0;" align="center">
+                          <tr>
+                            <td>char</td>
+                            <td>cnt</td>
+                            <td>before</td>
+                            <td>after</td>
+                            <td>max-distance</td>
+                          </tr>
+                          @foreach ($stats as $char => $node)
+                            <tr>
+                              <td>{{ $char }}</td>
+                              <td>{{ $node['count'] }}</td>
+                              <td>{{ json_encode( $node['before'] ) }}</td>
+                              <td>{{ json_encode( $node['after'] ) }}</td>
+                              <td>{{ $node['distance'] }}</td>
+                            </tr>
+                          @endforeach
+                        </table>
+                    </div>
+                @endif
             </div>
         </div>
     </body>
